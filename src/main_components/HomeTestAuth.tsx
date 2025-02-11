@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
 import useDarkSkyAnimationStore from "../stores/useDarkSkyAnimationStore";
-import SimpleNavbar from "../reusable_components/SimpleNavbar";
+import AuthNavbar from "../reusable_components/AuthNavbar";
 import { useNavigate } from "react-router-dom";
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { initializePixels, startAnimation, stopAnimation } = useDarkSkyAnimationStore();
   const navigate = useNavigate();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     initializePixels();
@@ -42,9 +44,12 @@ const App: React.FC = () => {
         style={{ position: "absolute", zIndex: 1 }}
       />
 
-      {/* Simple Navbar */}
-      <SimpleNavbar 
+      {/* Auth Navbar */}
+      <AuthNavbar
+        isAuthenticated={isAuthenticated}
         onNavigate={(path) => navigate(path)}
+        onLogin={() => setIsAuthenticated(true)}
+        onLogout={() => setIsAuthenticated(false)}
         menuItems={[
           { label: "Home", path: "/" },
           { label: "Projects", path: "/projects" },
@@ -56,4 +61,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Home;

@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box } from "@mui/material";
 import useDarkSkyAnimationStore from "../stores/useDarkSkyAnimationStore";
-import SimpleNavbar from "../reusable_components/SimpleNavbar";
+import RoleBasedNavbar from "../reusable_components/RoleBasedNavbar";
 import { useNavigate } from "react-router-dom";
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { initializePixels, startAnimation, stopAnimation } = useDarkSkyAnimationStore();
   const navigate = useNavigate();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [role, setRole] = useState("user");
 
   useEffect(() => {
     initializePixels();
@@ -42,9 +45,19 @@ const App: React.FC = () => {
         style={{ position: "absolute", zIndex: 1 }}
       />
 
-      {/* Simple Navbar */}
-      <SimpleNavbar 
+      {/* Role-Based Navbar with Always Visible Login/Logout */}
+      <RoleBasedNavbar
+        isAuthenticated={isAuthenticated}
+        role={role}
         onNavigate={(path) => navigate(path)}
+        onLogin={() => {
+          setIsAuthenticated(true);
+          setRole("admin"); // For testing purposes
+        }}
+        onLogout={() => {
+          setIsAuthenticated(false);
+          setRole("user");
+        }}
         menuItems={[
           { label: "Home", path: "/" },
           { label: "Projects", path: "/projects" },
@@ -56,4 +69,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Home;

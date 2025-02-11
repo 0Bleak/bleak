@@ -56,42 +56,58 @@ const useDarkSkyAnimationStore = create<DarkSkyAnimationStore>((set, get) => ({
       }),
     })),
 
-  startAnimation: (canvas) => {
-    const { animationFrameId } = get();
+    startAnimation: (canvas) => {
+      const { animationFrameId } = get();
+      
+      // Prevent multiple animations running
+      if (animationFrameId !== null) return;
     
-    // Prevent multiple animations running
-    if (animationFrameId !== null) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const animate = () => {
-      const { pixels, movePixels } = get();
-
-      ctx.fillStyle = `rgba(0, 0, 0, 0.1)`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Draw stars
-      pixels.forEach((pixel) => {
-        const brightness = 1 / pixel.z;
-        ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
-        ctx.fillRect(
-          (pixel.x / 100) * canvas.width,
-          (pixel.y / 100) * canvas.height,
-          pixel.size,
-          pixel.size
-        );
-      });
-
-      movePixels();
-
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+    
+      const animate = () => {
+        const { pixels, movePixels } = get();
+    
+        // Clear the canvas with fully opaque black
+        ctx.fillStyle = `rgba(0, 0, 0, 1)`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+        // Draw stars with a small trail
+        pixels.forEach((pixel) => {
+          const brightness = 1 / pixel.z;
+          const trailLength = 5; // Adjust the length of the trail
+    
+          // Draw the trail
+          for (let i = 0; i < trailLength; i++) {
+            const trailBrightness = brightness * (1 - i / trailLength);
+            ctx.fillStyle = `rgba(255, 255, 255, ${trailBrightness})`;
+            ctx.fillRect(
+              ((pixel.x - pixel.speedX * i) / 100) * canvas.width,
+              ((pixel.y - pixel.speedY * i) / 100) * canvas.height,
+              pixel.size,
+              pixel.size
+            );
+          }
+    
+          // Draw the head of the star
+          ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
+          ctx.fillRect(
+            (pixel.x / 100) * canvas.width,
+            (pixel.y / 100) * canvas.height,
+            pixel.size,
+            pixel.size
+          );
+        });
+    
+        movePixels();
+    
+        const frameId = requestAnimationFrame(animate);
+        set({ animationFrameId: frameId });
+      };
+    
       const frameId = requestAnimationFrame(animate);
       set({ animationFrameId: frameId });
-    };
-
-    const frameId = requestAnimationFrame(animate);
-    set({ animationFrameId: frameId });
-  },
+    },
 
   stopAnimation: () => {
     const { animationFrameId } = get();

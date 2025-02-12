@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Box, Button, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -14,7 +14,7 @@ interface RoleBasedNavbarProps {
   customStyles?: { button?: object; container?: object; iconButton?: object };
 }
 
-const RoleBasedNavbar: React.FC<RoleBasedNavbarProps> = ({
+const RoleBasedNavbar = ({
   isAuthenticated,
   role,
   onNavigate,
@@ -22,7 +22,7 @@ const RoleBasedNavbar: React.FC<RoleBasedNavbarProps> = ({
   onLogout,
   menuItems = [],
   customStyles = {},
-}) => {
+} :RoleBasedNavbarProps)=> {
   const [isExpanded, setIsExpanded] = useState(false);
   const theme = useTheme();
 

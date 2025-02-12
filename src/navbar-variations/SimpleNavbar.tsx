@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Box, Button, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -10,11 +10,11 @@ interface SimpleNavbarProps {
   customStyles?: { button?: object; container?: object; iconButton?: object };
 }
 
-const SimpleNavbar: React.FC<SimpleNavbarProps> = ({
+const SimpleNavbar = ({
   onNavigate,
   menuItems,
   customStyles = {},
-}) => {
+}: SimpleNavbarProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const theme = useTheme();
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Box, Button, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,14 +13,14 @@ interface AuthNavbarProps {
   customStyles?: { button?: object; container?: object; iconButton?: object };
 }
 
-const AuthNavbar: React.FC<AuthNavbarProps> = ({
+const AuthNavbar = ({
   isAuthenticated,
   onNavigate,
   onLogin,
   onLogout,
   menuItems = [],
   customStyles = {},
-}) => {
+}: AuthNavbarProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const theme = useTheme();
 
@@ -84,7 +84,6 @@ const AuthNavbar: React.FC<AuthNavbarProps> = ({
             <CloseIcon />
           </IconButton>
 
-          {/* Render menu items only if they exist */}
           {menuItems.length > 0 &&
             menuItems.map((item, index) => (
               <Button
@@ -112,7 +111,6 @@ const AuthNavbar: React.FC<AuthNavbarProps> = ({
               </Button>
             ))}
 
-          {/* Always show Login/Logout buttons */}
           <Button
             sx={{
               color: theme.palette.text.primary,

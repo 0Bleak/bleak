@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import useDarkSkyAnimationStore from "../stores/useDarkSkyAnimationStore";
-import SimpleNavbar from "../reusable_components/SimpleNavbar";
+import SimpleNavbar from '../navbar-variations/SimpleNavbar'
 import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -41,8 +41,6 @@ const App: React.FC = () => {
         height={window.innerHeight}
         style={{ position: "absolute", zIndex: 1 }}
       />
-
-      {/* Simple Navbar */}
       <SimpleNavbar 
         onNavigate={(path) => navigate(path)}
         menuItems={[

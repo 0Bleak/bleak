@@ -12,7 +12,7 @@ interface Pixel {
 
 interface DarkSkyAnimationStore {
   pixels: Pixel[];
-  animationFrameId: number | null; // Store animation frame ID
+  animationFrameId: number | null; 
   initializePixels: () => void;
   movePixels: () => void;
   startAnimation: (canvas: HTMLCanvasElement) => void;
@@ -59,7 +59,6 @@ const useDarkSkyAnimationStore = create<DarkSkyAnimationStore>((set, get) => ({
     startAnimation: (canvas) => {
       const { animationFrameId } = get();
       
-      // Prevent multiple animations running
       if (animationFrameId !== null) return;
     
       const ctx = canvas.getContext("2d");
@@ -68,16 +67,13 @@ const useDarkSkyAnimationStore = create<DarkSkyAnimationStore>((set, get) => ({
       const animate = () => {
         const { pixels, movePixels } = get();
     
-        // Clear the canvas with fully opaque black
         ctx.fillStyle = `rgba(0, 0, 0, 1)`;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-        // Draw stars with a small trail
         pixels.forEach((pixel) => {
           const brightness = 1 / pixel.z;
-          const trailLength = 5; // Adjust the length of the trail
+          const trailLength = 5; 
     
-          // Draw the trail
           for (let i = 0; i < trailLength; i++) {
             const trailBrightness = brightness * (1 - i / trailLength);
             ctx.fillStyle = `rgba(255, 255, 255, ${trailBrightness})`;
@@ -89,7 +85,6 @@ const useDarkSkyAnimationStore = create<DarkSkyAnimationStore>((set, get) => ({
             );
           }
     
-          // Draw the head of the star
           ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
           ctx.fillRect(
             (pixel.x / 100) * canvas.width,

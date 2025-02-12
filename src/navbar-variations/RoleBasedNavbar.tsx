@@ -10,7 +10,7 @@ interface RoleBasedNavbarProps {
   onNavigate: (path: string) => void;
   onLogin: () => void;
   onLogout: () => void;
-  menuItems?: { label: string; path: string }[];
+  menuItems?: { label: string; path: string; roles?: string[] }[];
   customStyles?: { button?: object; container?: object; iconButton?: object };
 }
 
@@ -20,18 +20,17 @@ const RoleBasedNavbar: React.FC<RoleBasedNavbarProps> = ({
   onNavigate,
   onLogin,
   onLogout,
-  menuItems = [
-    { label: "Home", path: "/" },
-    { label: "Projects", path: "/projects" },
-    { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact" },
-  ],
+  menuItems = [],
   customStyles = {},
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const theme = useTheme();
 
   const toggleNavbar = () => setIsExpanded(!isExpanded);
+
+  const filteredMenuItems = menuItems.filter(
+    (item) => !item.roles || item.roles.includes(role)
+  );
 
   return (
     <Box
@@ -91,7 +90,7 @@ const RoleBasedNavbar: React.FC<RoleBasedNavbarProps> = ({
             <CloseIcon />
           </IconButton>
 
-          {menuItems.map((item, index) => (
+          {filteredMenuItems.map((item, index) => (
             <Button
               key={index}
               sx={{
@@ -146,3 +145,18 @@ const RoleBasedNavbar: React.FC<RoleBasedNavbarProps> = ({
 };
 
 export default RoleBasedNavbar;
+
+
+// <RoleBasedNavbar
+//   isAuthenticated={true}
+//   role="admin"
+//   onNavigate={(path) => console.log("Navigate to:", path)}
+//   onLogin={() => console.log("Logging in")}
+//   onLogout={() => console.log("Logging out")}
+//   menuItems={[
+//     { label: "Dashboard", path: "/dashboard", roles: ["admin"] },
+//     { label: "Users", path: "/users", roles: ["admin"] },
+//     { label: "Settings", path: "/settings", roles: ["admin", "moderator"] },
+//     { label: "Profile", path: "/profile", roles: ["admin", "user", "moderator"] },
+//   ]}
+// />

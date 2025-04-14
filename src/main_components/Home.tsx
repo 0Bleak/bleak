@@ -15,6 +15,8 @@ const App: React.FC = () => {
     if (canvas) {
       startAnimation(canvas);
     }
+
+    
     return () => {
       stopAnimation();
     };

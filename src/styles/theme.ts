@@ -29,7 +29,7 @@ const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          fontFamily: 'Cairo, sans-serif', // Retained for aesthetics
+          fontFamily: '', 
         },
       },
     },

@@ -18,7 +18,7 @@ const App: React.FC = () => {
     return () => {
       stopAnimation();
     };
-  }, []);
+  }, [initializePixels,startAnimation,stopAnimation]);
 
   return (
     <Box

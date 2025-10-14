@@ -1,8 +1,7 @@
-import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from '../main_components/Home';
 
-const RoutesComponent: React.FC = () => {
+const RoutesComponent = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />

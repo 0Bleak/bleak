@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import useDarkSkyAnimationStore from "../stores/useDarkSkyAnimationStore";
 import SimpleNavbar from '../navbar-variations/SimpleNavbar'
 import { useNavigate } from "react-router-dom";
 
-const App: React.FC = () => {
+const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { initializePixels, startAnimation, stopAnimation } = useDarkSkyAnimationStore();
   const navigate = useNavigate();
@@ -45,8 +45,9 @@ const App: React.FC = () => {
         onNavigate={(path) => navigate(path)}
         menuItems={[
           { label: "Home", path: "/" },
+          { label: "Whoami", path: "/whoami" },
           { label: "Projects", path: "/projects" },
-          { label: "About", path: "/about" },
+          { label: "music", path: "/music" },
           { label: "Contact", path: "/contact" }
         ]}
       />

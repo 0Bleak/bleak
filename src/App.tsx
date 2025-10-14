@@ -1,10 +1,9 @@
-import React from 'react';
 import { HashRouter as Router } from 'react-router-dom'; 
 import { ThemeProvider } from '@mui/material/styles';
 import RoutesComponent from './routing/RoutesComponent';
 import theme from './styles/theme';
 
-const App: React.FC = () => {
+const App= () => {
   return (
     <ThemeProvider theme={theme} >
       <Router>

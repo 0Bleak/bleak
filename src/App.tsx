@@ -1,16 +1,23 @@
-import { HashRouter as Router } from 'react-router-dom'; 
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, CssBaseline, Box } from '@mui/material';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { darkTheme } from './styles/theme';
+import SimpleNavbar from './navbar-variations/SimpleNavbar';
 import RoutesComponent from './routing/RoutesComponent';
-import theme from './styles/theme';
 
-const App= () => {
+function App() {
   return (
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <Router>
-        <RoutesComponent />
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <SimpleNavbar />
+          <Box component="main" sx={{ flexGrow: 1 }}>
+            <RoutesComponent />
+          </Box>
+        </Box>
       </Router>
     </ThemeProvider>
   );
-};
+}
 
 export default App;

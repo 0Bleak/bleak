@@ -1,136 +1,144 @@
-import { useState } from "react";
-import { Box, Button, IconButton } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
+import { AppBar, Toolbar, Typography, Button, Box, IconButton, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-interface SimpleNavbarProps {
-  onNavigate: (path: string) => void;
-  menuItems: { label: string; path: string }[];
-  customStyles?: { button?: object; container?: object };
-}
-
-const SimpleNavbar = ({
-  onNavigate,
-  menuItems,
-  customStyles = {},
-}: SimpleNavbarProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const SimpleNavbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navItems = [
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '/about' },
+    { label: 'Experience', path: '/experience' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'Contact', path: '/contact' },
+  ];
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <Box sx={{ width: 250, pt: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', px: 2, pb: 2 }}>
+        <IconButton onClick={handleDrawerToggle}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.path} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                navigate(item.path);
+                handleDrawerToggle();
+              }}
+              selected={location.pathname === item.path}
+              sx={{
+                '&.Mui-selected': {
+                  background: 'rgba(0, 212, 255, 0.1)',
+                  borderLeft: '3px solid',
+                  borderColor: 'primary.main',
+                },
+              }}
+            >
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
     <>
-      <Box
+      <AppBar
+        position="sticky"
         sx={{
-          position: "fixed",
-          top: "32px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 1000,
-          display: { xs: "none", md: "flex" },
-          gap: "8px",
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
-          backdropFilter: "blur(12px)",
-          padding: "8px",
-          borderRadius: "50px",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
-          ...customStyles.container,
+          background: 'rgba(10, 14, 39, 0.8)',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
         }}
       >
-        {menuItems.map((item, index) => (
-          <Button
-            key={item.path}
-            onClick={() => {
-              setActiveIndex(index);
-              onNavigate(item.path);
-            }}
+        <Toolbar>
+          <Typography
+            variant="h6"
+            component="div"
             sx={{
-              color: activeIndex === index ? "#ffffff" : "rgba(255, 255, 255, 0.6)",
-              textTransform: "none",
-              padding: "8px 24px",
-              fontSize: "0.9rem",
-              fontWeight: 500,
-              borderRadius: "50px",
-              backgroundColor: activeIndex === index ? "rgba(255, 255, 255, 0.1)" : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255, 255, 255, 0.08)",
-                color: "#ffffff",
-              },
-              transition: "all 0.2s ease",
-              ...customStyles.button,
+              flexGrow: 1,
+              cursor: 'pointer',
+              fontWeight: 700,
+              background: 'linear-gradient(135deg, #00d4ff 0%, #bb86fc 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             }}
+            onClick={() => navigate('/')}
           >
-            {item.label}
-          </Button>
-        ))}
-      </Box>
+            Bleak
+          </Typography>
 
-      <IconButton
-        onClick={() => setMobileOpen(!mobileOpen)}
+          {/* Desktop Menu */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                sx={{
+                  color: location.pathname === item.path ? 'primary.main' : 'text.primary',
+                  fontWeight: location.pathname === item.path ? 600 : 400,
+                  position: 'relative',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: location.pathname === item.path ? '80%' : '0%',
+                    height: '2px',
+                    background: 'linear-gradient(90deg, #00d4ff 0%, #bb86fc 100%)',
+                    transition: 'width 0.3s ease',
+                  },
+                  '&:hover::after': {
+                    width: '80%',
+                  },
+                }}
+              >
+                {item.label}
+              </Button>
+            ))}
+          </Box>
+
+          {/* Mobile Menu Icon */}
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ display: { md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
         sx={{
-          position: "fixed",
-          top: "24px",
-          right: "24px",
-          zIndex: 1001,
-          display: { xs: "flex", md: "none" },
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
-          backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
-          color: "#ffffff",
-          "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.1)",
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': {
+            background: '#151a2e',
           },
         }}
       >
-        {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-      </IconButton>
-
-      {mobileOpen && (
-        <Box
-          sx={{
-            position: "fixed",
-            top: "80px",
-            right: "24px",
-            zIndex: 1000,
-            display: { xs: "flex", md: "none" },
-            flexDirection: "column",
-            gap: "8px",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-            backdropFilter: "blur(12px)",
-            padding: "12px",
-            borderRadius: "12px",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
-          }}
-        >
-          {menuItems.map((item, index) => (
-            <Button
-              key={item.path}
-              onClick={() => {
-                setActiveIndex(index);
-                onNavigate(item.path);
-                setMobileOpen(false);
-              }}
-              sx={{
-                color: activeIndex === index ? "#ffffff" : "rgba(255, 255, 255, 0.6)",
-                textTransform: "none",
-                padding: "10px 24px",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                borderRadius: "8px",
-                justifyContent: "flex-start",
-                minWidth: "140px",
-                backgroundColor: activeIndex === index ? "rgba(255, 255, 255, 0.1)" : "transparent",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.08)",
-                  color: "#ffffff",
-                },
-                transition: "all 0.2s ease",
-              }}
-            >
-              {item.label}
-            </Button>
-          ))}
-        </Box>
-      )}
+        {drawer}
+      </Drawer>
     </>
   );
 };

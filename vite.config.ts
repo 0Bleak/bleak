@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   base: '/bleak/',
   build: {
-    outDir: 'docs'
+    outDir: 'dist'  // Change back to dist
   }
 })

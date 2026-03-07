@@ -1,149 +1,86 @@
-import { Box, Container, Typography, Paper, IconButton, Link } from '@mui/material';
+import { Box, Container, Typography, Link, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import LanguageIcon from '@mui/icons-material/Language';
 
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: <EmailIcon />,
-      label: 'Email',
-      value: 'mr.tamimi.mohammed@gmail.com',
-      link: 'mailto:mr.tamimi.mohammed@gmail.com',
-    },
-    {
-      icon: <PhoneIcon />,
-      label: 'Phone',
-      value: '+33 7 63 43 19 96',
-      link: 'tel:+33763431996',
-    },
-    {
-      icon: <LocationOnIcon />,
-      label: 'Location',
-      value: 'Biarritz 64200, France',
-    },
+  const info = [
+    { icon: <EmailIcon sx={{ fontSize: '1rem' }} />, label: 'mr.tamimi.mohammed@gmail.com', href: 'mailto:mr.tamimi.mohammed@gmail.com' },
+    { icon: <PhoneIcon sx={{ fontSize: '1rem' }} />, label: '+33 7 63 43 19 96', href: 'tel:+33763431996' },
+    { icon: <LocationOnIcon sx={{ fontSize: '1rem' }} />, label: 'Biarritz 64200, France', href: undefined },
   ];
-const socialLinks = [
-  {
-    icon: <LinkedInIcon />,
-    label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/tamimi-mohammed-b73b22255/',
-  },
-  {
-    icon: <GitHubIcon />,
-    label: 'GitHub',
-    link: 'https://github.com/0Bleak',
-  },
-  {
-    icon: <LanguageIcon />,
-    label: 'Portfolio',
-    link: 'https://0bleak.github.io/bleak/',
-  },
-];
+
+  const socials = [
+    { icon: <LinkedInIcon />, href: 'https://www.linkedin.com/in/tamimi-mohammed-b73b22255/' },
+    { icon: <GitHubIcon />, href: 'https://github.com/0Bleak' },
+  ];
 
   return (
     <Box sx={{ minHeight: '100vh', py: 8 }}>
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h2" gutterBottom sx={{ mb: 2, textAlign: 'center' }}>
-            Get In Touch
+          <Typography variant="overline" sx={{ display: 'block', mb: 1, color: '#444' }}>
+            CONTACT
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 6, textAlign: 'center', maxWidth: '600px', mx: 'auto' }}>
-            I'm currently seeking an end-of-studies internship. Feel free to reach out if you have any opportunities or just want to connect!
+          <Typography variant="h2" sx={{ mb: 1 }}>
+            Get in touch
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 5, color: '#444' }}>
+            Open to security opportunities and collaboration.
           </Typography>
 
-          <Paper
-            sx={{
-              p: 4,
-              background: 'linear-gradient(135deg, #151a2e 0%, #1a2038 100%)',
-              mb: 4,
-            }}
-          >
-            {contactInfo.map((info, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    py: 2,
-                    borderBottom: index < contactInfo.length - 1 ? '1px solid rgba(255,255,255,0.1)' : 'none',
-                  }}
-                >
-                  <Box
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, mb: 5 }}>
+            {info.map((item, i) => (
+              <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Box sx={{ color: '#444' }}>{item.icon}</Box>
+                {item.href ? (
+                  <Link
+                    href={item.href}
                     sx={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: '50%',
-                      background: 'rgba(0, 212, 255, 0.1)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'primary.main',
-                      mr: 3,
+                      color: '#888',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      fontFamily: '"JetBrains Mono", monospace',
+                      '&:hover': { color: '#ccc' },
                     }}
                   >
-                    {info.icon}
-                  </Box>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" color="text.secondary">
-                      {info.label}
-                    </Typography>
-                    {info.link ? (
-                      <Link href={info.link} sx={{ color: 'text.primary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}>
-                        <Typography variant="body1">{info.value}</Typography>
-                      </Link>
-                    ) : (
-                      <Typography variant="body1">{info.value}</Typography>
-                    )}
-                  </Box>
-                </Box>
-              </motion.div>
+                    {item.label}
+                  </Link>
+                ) : (
+                  <Typography variant="body1" sx={{ color: '#888', fontSize: '0.85rem' }}>
+                    {item.label}
+                  </Typography>
+                )}
+              </Box>
             ))}
-          </Paper>
+          </Box>
 
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="h5" sx={{ mb: 3 }}>
-              Connect With Me
-            </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-              {socialLinks.map((social, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <IconButton
-                    component="a"
-                    href={social.link}
-                    target="_blank"
-                    sx={{
-                      width: 56,
-                      height: 56,
-                      background: 'linear-gradient(135deg, #00d4ff 0%, #bb86fc 100%)',
-                      color: 'white',
-                      '&:hover': {
-                        background: 'linear-gradient(135deg, #00a8cc 0%, #9966cc 100%)',
-                      },
-                    }}
-                  >
-                    {social.icon}
-                  </IconButton>
-                </motion.div>
-              ))}
-            </Box>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            {socials.map((s, i) => (
+              <IconButton
+                key={i}
+                component="a"
+                href={s.href}
+                target="_blank"
+                sx={{
+                  color: '#444',
+                  border: '1px solid #1e1e1e',
+                  borderRadius: 1,
+                  width: 40,
+                  height: 40,
+                  '&:hover': { color: '#aaa', borderColor: '#333' },
+                }}
+              >
+                {s.icon}
+              </IconButton>
+            ))}
           </Box>
         </motion.div>
       </Container>

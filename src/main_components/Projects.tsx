@@ -1,122 +1,103 @@
-import { Box, Container, Typography, Grid, Card, CardContent, Chip, IconButton } from '@mui/material';
+import { Box, Container, Typography, Chip, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import LaunchIcon from '@mui/icons-material/Launch';
 
 const Projects = () => {
   const projects = [
     {
-      title: 'Wine Quality Prediction Dashboard',
-      description:
-        'Exploratory analysis and machine learning models for wine quality prediction. Interactive visualizations with Power BI.',
-      tech: ['Python', 'scikit-learn', 'Power BI', 'JupyterLab'],
-      category: 'Data Science',
+      title: 'E-commerce Microservices Platform',
+      desc: '6-service architecture with service discovery, API Gateway, async messaging, monitoring, and CI/CD.',
+      tech: ['Go', 'Protocol Buffers', 'PostgreSQL', 'MongoDB', 'Redis', 'NATS', 'Consul', 'Docker', 'Prometheus', 'Grafana', 'GitHub Actions'],
+      category: 'distributed systems',
     },
     {
-      title: 'E-commerce Microservices Platform',
-      description:
-        '6 microservices architecture with service discovery, API Gateway, asynchronous messaging, centralized monitoring, and CI/CD pipeline.',
-      tech: ['Go', 'Protocol Buffers', 'PostgreSQL', 'MongoDB', 'Redis', 'NATS', 'Consul', 'Docker', 'Prometheus', 'Grafana', 'GitHub Actions'],
-      category: 'Backend',
+      title: 'Wine Quality Prediction',
+      desc: 'ML models for wine quality classification with exploratory analysis and interactive dashboards.',
+      tech: ['Python', 'scikit-learn', 'Power BI', 'JupyterLab'],
+      category: 'machine learning',
+    },
+    {
+      title: 'RAG Olive Oil Q&A System',
+      desc: 'Retrieval-Augmented Generation system using vector search and local LLM inference.',
+      tech: ['Python', 'FAISS', 'Ollama', 'Semantic MediaWiki', 'phi3:mini'],
+      category: 'ai / nlp',
     },
     {
       title: 'IoT Monitoring Dashboard',
-      description: 'Real-time visualization dashboard for simulated IoT sensors with live data streaming and interactive charts.',
-      tech: ['Node.js', 'Express.js', 'React', 'TypeScript', 'Chart.js', 'MongoDB', 'WebSockets', 'Docker'],
-      category: 'Full Stack',
-    },
-    {
-      title: 'Library Management API',
-      description: 'RESTful API for managing book loans and reservations with authentication and authorization.',
-      tech: ['C#', 'ASP.NET Core', 'SQL Server', 'JWT'],
-      category: 'Backend',
+      desc: 'Real-time monitoring for simulated IoT sensors with live data streaming.',
+      tech: ['Node.js', 'React', 'TypeScript', 'MongoDB', 'WebSockets', 'Docker'],
+      category: 'iot',
     },
   ];
 
   return (
     <Box sx={{ minHeight: '100vh', py: 8 }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Typography variant="h2" gutterBottom sx={{ mb: 2 }}>
-            Academic Projects
+          <Typography variant="overline" sx={{ display: 'block', mb: 1, color: '#444' }}>
+            PROJECTS
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 6, maxWidth: '800px' }}>
-            A collection of projects showcasing my skills in full-stack development, data science, and microservices architecture.
+          <Typography variant="h2" sx={{ mb: 5 }}>
+            Selected Work
           </Typography>
 
-          <Grid container spacing={4}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             {projects.map((project, index) => (
-              <Grid item xs={12} md={6} key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08 }}
+              >
+                <Box
+                  sx={{
+                    p: 3,
+                    bgcolor: '#111',
+                    border: '1px solid #1a1a1a',
+                    borderRadius: 1,
+                    transition: 'border-color 0.2s ease',
+                    '&:hover': { borderColor: '#333' },
+                  }}
                 >
-                  <Card
-                    sx={{
-                      height: '100%',
-                      background: 'linear-gradient(135deg, #151a2e 0%, #1a2038 100%)',
-                      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                      '&:hover': {
-                        transform: 'translateY(-8px)',
-                        boxShadow: '0 12px 40px rgba(0, 212, 255, 0.2)',
-                      },
-                    }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 2 }}>
-                        <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                          {project.title}
-                        </Typography>
-                        <Box>
-                          <IconButton size="small" sx={{ color: 'primary.main' }}>
-                            <GitHubIcon />
-                          </IconButton>
-                          <IconButton size="small" sx={{ color: 'primary.main' }}>
-                            <LaunchIcon />
-                          </IconButton>
-                        </Box>
-                      </Box>
-
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 1 }}>
+                    <Box>
+                      <Typography variant="h3" sx={{ mb: 0.5 }}>
+                        {project.title}
+                      </Typography>
+                      <Typography variant="overline" sx={{ color: '#444' }}>
+                        {project.category}
+                      </Typography>
+                    </Box>
+                    <IconButton size="small" sx={{ color: '#444', '&:hover': { color: '#888' } }}>
+                      <GitHubIcon fontSize="small" />
+                    </IconButton>
+                  </Box>
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                    {project.desc}
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {project.tech.map((t) => (
                       <Chip
-                        label={project.category}
+                        key={t}
+                        label={t}
                         size="small"
                         sx={{
-                          mb: 2,
-                          background: 'rgba(187, 134, 252, 0.1)',
-                          border: '1px solid rgba(187, 134, 252, 0.3)',
-                          color: 'secondary.light',
+                          bgcolor: '#0e0e0e',
+                          color: '#555',
+                          border: '1px solid #1a1a1a',
+                          height: 22,
                         }}
                       />
-
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                        {project.description}
-                      </Typography>
-
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                        {project.tech.map((tech) => (
-                          <Chip
-                            key={tech}
-                            label={tech}
-                            size="small"
-                            sx={{
-                              fontSize: '0.75rem',
-                              background: 'rgba(0, 212, 255, 0.05)',
-                              border: '1px solid rgba(0, 212, 255, 0.2)',
-                            }}
-                          />
-                        ))}
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
+                    ))}
+                  </Box>
+                </Box>
+              </motion.div>
             ))}
-          </Grid>
+          </Box>
         </motion.div>
       </Container>
     </Box>

@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   const skills: Record<string, string[]> = {
-    languages: ['C', 'C++', 'Python', 'Go', 'Java'],
-    tools: ['Docker', 'Git', 'Linux', 'GDB', 'Wireshark'],
+    languages: ['C', 'C++', 'Python', 'Rust'],
+    tools: ['Docker', 'Git', 'Linux', 'GDB', 'Wireshark', 'Nmap', 'Burp Suite', 'Metasploit', 'Ghidra', 'radare2', 'tcpdump', 'John the Ripper', 'hashcat'],
     data: ['PostgreSQL', 'MongoDB', 'Redis'],
     interests: ['Reverse Engineering', 'Binary Exploitation', 'Network Security', 'Reinforcement Learning', '5G/Telecom Security'],
   };

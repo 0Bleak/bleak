@@ -33,7 +33,7 @@ const Contact = () => {
             Get in touch
           </Typography>
           <Typography variant="body2" sx={{ mb: 5, color: '#444' }}>
-            Open to security opportunities and collaboration.
+            Open to interesting opportunities and collaboration.
           </Typography>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, mb: 5 }}>

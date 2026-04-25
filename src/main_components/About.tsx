@@ -2,12 +2,18 @@ import { Box, Container, Typography, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const About = () => {
-  const skills: Record<string, string[]> = {
-    languages: ['C', 'C++', 'Python', 'Rust'],
-    tools: ['Docker', 'Git', 'Linux', 'GDB', 'Wireshark', 'Nmap', 'Burp Suite', 'Metasploit', 'Ghidra', 'radare2', 'tcpdump', 'John the Ripper', 'hashcat'],
-    data: ['PostgreSQL', 'MongoDB', 'Redis'],
-    interests: ['Reverse Engineering', 'Binary Exploitation', 'Network Security', 'Reinforcement Learning', '5G/Telecom Security'],
-  };
+const skills: Record<string, string[]> = {
+  languages: ['Go', 'Python', 'Rust'],
+  backend: ['gRPC', 'Protocol Buffers', 'REST', 'FastAPI'],
+  streaming: ['Apache Kafka', 'NATS'],
+  databases: ['PostgreSQL', 'Redis', 'ScyllaDB'],
+  consensus: ['etcd', 'Raft'],
+  orchestration: ['Kubernetes', 'Helm', 'Docker'],
+  observability: ['Prometheus', 'Grafana', 'OpenTelemetry', 'Loki', 'Jaeger'],
+  cloud: ['AWS', 'Terraform', 'Pulumi'],
+  networking: ['eBPF', 'XDP', 'Cilium', 'mTLS', 'SPIFFE/SPIRE'],
+  ml: ['Ray RLlib', 'ONNX', 'stable-baselines3'],
+};
 
   const languages = [
     { name: 'French', level: 'Native' },
@@ -37,11 +43,11 @@ const About = () => {
           <Typography variant="h2" sx={{ mb: 3 }}>
             Background
           </Typography>
-          <Typography variant="body1" sx={{ mb: 6, maxWidth: 600 }}>
-            Masters in Computer Science. Interested in systems engineering, low-level security, 
-            machine learning, and telecom infrastructure. Currently learning reverse engineering, 
-            exploit development, and network security.
-          </Typography>
+            <Typography variant="body1" sx={{ mb: 6, maxWidth: 600 }}>
+              Master in Computer Science. Interested in backend engineering, 
+              distributed systems, and low-level programming. Currently building toward 
+              a systems engineering profile — Go, Kafka, Kubernetes, eBPF.
+            </Typography>
 
           {/* Education */}
           <Box sx={{ mb: 6 }}>

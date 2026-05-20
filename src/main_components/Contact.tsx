@@ -10,7 +10,7 @@ const Contact = () => {
   const info = [
     { icon: <EmailIcon sx={{ fontSize: '1rem' }} />, label: 'mr.tamimi.mohammed@gmail.com', href: 'mailto:mr.tamimi.mohammed@gmail.com' },
     { icon: <PhoneIcon sx={{ fontSize: '1rem' }} />, label: '+33 7 63 43 19 96', href: 'tel:+33763431996' },
-    { icon: <LocationOnIcon sx={{ fontSize: '1rem' }} />, label: 'Biarritz 64200, France', href: undefined },
+    { icon: <LocationOnIcon sx={{ fontSize: '1rem' }} />, label: 'Villiers-sur-Marne, France', href: undefined },
   ];
 
   const socials = [

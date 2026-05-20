@@ -21,7 +21,7 @@ const Home = () => {
           transition={{ duration: 0.8 }}
         >
           <Typography variant="overline" sx={{ mb: 2, display: 'block', color: '#444' }}>
-            backend & systems engineer
+            ML & Systems engineer
           </Typography>
           <Typography variant="h1" sx={{ mb: 2 }}>
             Mohammed Tamimi

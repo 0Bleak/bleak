@@ -66,7 +66,6 @@ const Navbar = () => {
               </Button>
             ))}
           </Box>
-
           <IconButton
             color="inherit"
             onClick={handleDrawerToggle}

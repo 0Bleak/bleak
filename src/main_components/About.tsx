@@ -3,16 +3,14 @@ import { motion } from 'framer-motion';
 
 const About = () => {
 const skills: Record<string, string[]> = {
-  languages: ['Go', 'Python', 'Rust'],
-  backend: ['gRPC', 'Protocol Buffers', 'REST', 'FastAPI'],
-  streaming: ['Apache Kafka', 'NATS'],
-  databases: ['PostgreSQL', 'Redis', 'ScyllaDB'],
-  consensus: ['etcd', 'Raft'],
-  orchestration: ['Kubernetes', 'Helm', 'Docker'],
-  observability: ['Prometheus', 'Grafana', 'OpenTelemetry', 'Loki', 'Jaeger'],
-  cloud: ['AWS', 'Terraform', 'Pulumi'],
-  networking: ['eBPF', 'XDP', 'Cilium', 'mTLS', 'SPIFFE/SPIRE'],
-  ml: ['Ray RLlib', 'ONNX', 'stable-baselines3'],
+  'systems & networks': ['Linux', 'TCP/IP', 'OSI model'],
+  'programming languages': ['Python', 'C', 'C++', 'Go', 'Zig', 'CUDA'],
+  backend: ['Node.js', 'Express.js', 'NestJS', 'FastAPI'],
+  databases: ['MongoDB', 'MySQL', 'PostgreSQL', 'Redis'],
+  'machine learning': ['scikit-learn', 'PyTorch', 'OpenCV', 'RAG', 'Ollama'],
+  microservices: ['Consul', 'Service Discovery', 'NGINX', 'Apache Kafka'],
+  devops: ['Docker', 'Docker Compose', 'Kubernetes', 'CI/CD (GitHub Actions)'],
+  monitoring: ['Prometheus', 'Grafana'],
 };
 
   const languages = [

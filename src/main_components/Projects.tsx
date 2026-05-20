@@ -23,9 +23,9 @@ const projects = [
     category: 'systems / networking',
   },
   {
-    title: 'Wine Quality Prediction Dashboard',
-    desc: 'End-to-end physicochemical wine dataset analysis: feature engineering, correlation analysis, comparative classification model evaluation. Interactive Power BI dashboard for non-technical stakeholders.',
-    tech: ['Python', 'scikit-learn', 'Power BI', 'JupyterLab'],
+    title: 'Wine Quality Prediction',
+    desc: 'End-to-end physicochemical wine dataset analysis: feature engineering, correlation analysis, comparative classification model evaluation. Results visualized through interactive plots and performance dashboards.',
+    tech: ['Python', 'scikit-learn', 'matplotlib', 'seaborn', 'JupyterLab'],
     category: 'machine learning',
   },
 ];
